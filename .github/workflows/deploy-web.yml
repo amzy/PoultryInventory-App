@@ -1,4 +1,4 @@
-name: Deploy Web to Firebase Hosting
+name: Deploy Flutter Web to GitHub Pages
 
 on:
   push:
@@ -6,27 +6,34 @@ on:
       - main
     paths:
       - 'web/**'
-      - 'firebase.json'
-      - '.firebaserc'
       - '.github/workflows/deploy-web.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   deploy-web:
-    name: Deploy Web to Firebase Hosting
+    name: Deploy Flutter Web to Pages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Public Repo
         uses: actions/checkout@v4
 
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          projectId: poultryinventory
-          siteId: poultryinventory-app
-          channelId: live
+          path: web
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
