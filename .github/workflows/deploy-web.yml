@@ -23,7 +23,7 @@ jobs:
     name: Deploy Flutter Web to Pages
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Public Repo
+      - name: Checkout Public App Repo
         uses: actions/checkout@v4
 
       - name: Setup Pages
