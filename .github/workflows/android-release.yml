@@ -5,88 +5,39 @@ on:
     branches:
       - main
     paths:
-      - '.deploy/source-trigger'
+      - 'poultry-inventory.apk'
       - '.github/workflows/android-release.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
 
-env:
-  FLUTTER_VERSION: '3.47.4'
-
 jobs:
-  build-release:
-    name: Build Android APK
-    runs-on: [self-hosted]
-    timeout-minutes: 45
-
+  release:
+    name: Publish Android APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout public App repository
         uses: actions/checkout@v4
 
-      - name: Read private source commit
-        id: source
-        shell: bash
+      - name: Verify committed APK
         run: |
-          SOURCE_REF=$(sed -n 's/^source=//p' .deploy/source-trigger | head -n 1)
-          test -n "$SOURCE_REF"
-          echo "ref=$SOURCE_REF" >> "$GITHUB_OUTPUT"
+          test -s poultry-inventory.apk
+          file poultry-inventory.apk || true
+          ls -lh poultry-inventory.apk
 
-      - name: Checkout private source repository
-        uses: actions/checkout@v4
-        with:
-          repository: amzy/PoultryInventory
-          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: source
-          ref: ${{ steps.source.outputs.ref }}
-
-      - name: Verify toolchain
-        run: |
-          flutter --version
-          dart --version
-          java -version
-
-      - name: Get dependencies
-        working-directory: source
-        run: flutter pub get
-
-      - name: Analyze Dart code
-        working-directory: source
-        continue-on-error: true
-        run: flutter analyze
-
-      - name: Build release APK
-        working-directory: source
-        run: flutter build apk --release
-
-      - name: Read app version
+      - name: Read source version
         id: version
-        working-directory: source
         shell: bash
         run: |
-          VERSION_LINE=$(grep '^version:' pubspec.yaml | head -n 1 | sed 's/^version:[[:space:]]*//')
+          VERSION_LINE=$(grep '^version:' source-version.txt 2>/dev/null | head -n 1 | sed 's/^version:[[:space:]]*//' || true)
+          if [ -z "$VERSION_LINE" ]; then VERSION_LINE="1.0.1+0"; fi
           VERSION_NAME="${VERSION_LINE%%+*}"
           BUILD_NUMBER="${VERSION_LINE#*+}"
           if [ "$BUILD_NUMBER" = "$VERSION_LINE" ]; then BUILD_NUMBER=0; fi
           echo "version_name=$VERSION_NAME" >> "$GITHUB_OUTPUT"
           echo "build_number=$BUILD_NUMBER" >> "$GITHUB_OUTPUT"
-
-      - name: Prepare APK
-        working-directory: source
-        shell: bash
-        run: |
-          mkdir -p deployment
-          cp build/app/outputs/flutter-apk/app-release.apk deployment/poultry-inventory.apk
-          ls -lh deployment/poultry-inventory.apk
-
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: poultry-inventory-${{ steps.version.outputs.version_name }}-${{ github.run_number }}
-          path: source/deployment/poultry-inventory.apk
-          if-no-files-found: error
-          retention-days: 30
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -94,11 +45,11 @@ jobs:
           tag_name: build-${{ github.run_number }}
           name: Poultry Inventory ${{ steps.version.outputs.version_name }} (Build ${{ github.run_number }})
           body: |
-            Automated Android APK build from private PoultryInventory source.
+            Automated Android APK release.
 
             Version: ${{ steps.version.outputs.version_name }}
             Build number: ${{ steps.version.outputs.build_number }}
-            Private source commit: ${{ steps.source.outputs.ref }}
-          files: source/deployment/poultry-inventory.apk
+            Public App commit: ${{ github.sha }}
+          files: poultry-inventory.apk
           generate_release_notes: false
           prerelease: true
