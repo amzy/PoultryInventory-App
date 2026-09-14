@@ -25,13 +25,21 @@ jobs:
       - name: Checkout public App repository
         uses: actions/checkout@v4
 
+      - name: Read private source commit
+        id: source
+        shell: bash
+        run: |
+          SOURCE_REF=$(sed -n 's/^source=//p' .deploy/source-trigger | head -n 1)
+          test -n "$SOURCE_REF"
+          echo "ref=$SOURCE_REF" >> "$GITHUB_OUTPUT"
+
       - name: Checkout private source repository
         uses: actions/checkout@v4
         with:
           repository: amzy/PoultryInventory
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
           path: source
-          ref: main
+          ref: ${{ steps.source.outputs.ref }}
 
       - name: Verify toolchain
         run: |
@@ -90,7 +98,7 @@ jobs:
 
             Version: ${{ steps.version.outputs.version_name }}
             Build number: ${{ steps.version.outputs.build_number }}
-            Source commit: ${{ github.sha }}
+            Private source commit: ${{ steps.source.outputs.ref }}
           files: source/deployment/poultry-inventory.apk
           generate_release_notes: false
           prerelease: true
