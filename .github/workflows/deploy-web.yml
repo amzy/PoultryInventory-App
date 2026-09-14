@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - '.deploy/source-trigger'
+      - 'web/**'
       - '.github/workflows/deploy-web.yml'
   workflow_dispatch:
 
@@ -20,49 +20,18 @@ concurrency:
 
 jobs:
   deploy-web:
-    name: Build and Deploy Flutter Web
+    name: Deploy Flutter Web
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - name: Checkout public App repository
         uses: actions/checkout@v4
 
-      - name: Read private source commit
-        id: source
-        shell: bash
-        run: |
-          SOURCE_REF=$(sed -n 's/^source=//p' .deploy/source-trigger | head -n 1)
-          test -n "$SOURCE_REF"
-          echo "ref=$SOURCE_REF" >> "$GITHUB_OUTPUT"
-
-      - name: Checkout private source repository
-        uses: actions/checkout@v4
-        with:
-          repository: amzy/PoultryInventory
-          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: source
-          ref: ${{ steps.source.outputs.ref }}
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.47.4'
-          channel: stable
-          cache: true
-
-      - name: Get dependencies
-        working-directory: source
-        run: flutter pub get
-
-      - name: Build Flutter Web
-        working-directory: source
-        run: flutter build web --release --base-href /
-
       - name: Prepare Pages artifact
-        working-directory: source
         run: |
-          cp build/web/index.html build/web/404.html
-          printf 'app.ovaloasis.in\n' > build/web/CNAME
+          test -f web/index.html
+          test -f web/404.html
+          test -f web/CNAME
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -70,7 +39,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: source/build/web
+          path: web
 
       - name: Deploy to GitHub Pages
         id: deployment
