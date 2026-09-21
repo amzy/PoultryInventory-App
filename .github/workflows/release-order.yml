@@ -1,0 +1,73 @@
+name: Ordered Release Deployment
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'lib/**'
+      - 'android/**'
+      - 'ios/**'
+      - 'web/**'
+      - 'functions/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - 'poultry-inventory.apk'
+      - 'source-version.txt'
+      - 'website/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ordered-release
+  cancel-in-progress: false
+
+jobs:
+  detect:
+    name: Detect website changes
+    runs-on: ubuntu-latest
+    outputs:
+      website_changed: ${{ steps.changes.outputs.website_changed }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect website changes
+        id: changes
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "website_changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if git diff --quiet "${{ github.event.before }}" "${{ github.sha }}" -- website/; then
+            echo "website_changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "website_changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  web-app:
+    name: 1. Deploy Web App
+    needs: detect
+    uses: ./.github/workflows/deploy-web.yml
+
+  website:
+    name: 2. Deploy Marketing Website
+    needs: [detect, web-app]
+    if: ${{ needs.detect.outputs.website_changed == 'true' }}
+    uses: ./.github/workflows/publish-website.yml
+    secrets: inherit
+
+  apk:
+    name: 3. Deploy APK
+    needs: [detect, web-app, website]
+    if: ${{ always() && needs.web-app.result == 'success' && needs.website.result != 'failure' && needs.website.result != 'cancelled' }}
+    uses: ./.github/workflows/android-release.yml
