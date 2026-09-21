@@ -1,0 +1,63 @@
+name: Publish Marketing Website
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'website/**'
+      - '.github/workflows/publish-website.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-marketing-website
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    name: Sync website source to public repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout private source repository
+        uses: actions/checkout@v4
+
+      - name: Validate website source
+        run: |
+          test -f website/index.html
+          test -f website/styles.css
+          test -f website/script.js
+          test -f website/CNAME
+          test -f website/assets/logo.svg
+          test -f website/assets/farm-illustration.svg
+
+      - name: Checkout public website repository
+        uses: actions/checkout@v4
+        with:
+          repository: amzy/PoultryInventory-Website
+          token: ${{ secrets.WEBSITE_REPO_TOKEN }}
+          path: public-website
+          ref: main
+
+      - name: Sync website source
+        run: |
+          rsync -a --delete             --exclude='.git/'             --exclude='.github/'             website/ public-website/
+
+      - name: Publish changes
+        working-directory: public-website
+        run: |
+          git config user.name "OvalOasis Website Publisher"
+          git config user.email "actions@users.noreply.github.com"
+
+          if git diff --quiet; then
+            echo "No website changes to publish."
+            exit 0
+          fi
+
+          git add -A
+          git commit -m "Sync website from PoultryInventory-App"
+          git push origin main
