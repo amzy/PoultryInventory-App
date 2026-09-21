@@ -57,17 +57,122 @@ jobs:
   web-app:
     name: 1. Deploy Web App
     needs: detect
-    uses: ./.github/workflows/deploy-web.yml
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout App repository
+        uses: actions/checkout@v4
+
+      - name: Prepare Pages artifact
+        run: |
+          test -f web/index.html
+          test -f web/404.html
+          test -f web/CNAME
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+
+      - name: Deploy Web App
+        uses: actions/deploy-pages@v4
 
   website:
     name: 2. Deploy Marketing Website
     needs: [detect, web-app]
     if: ${{ needs.detect.outputs.website_changed == 'true' }}
-    uses: ./.github/workflows/publish-website.yml
-    secrets: inherit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout private source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Validate canonical website source
+        run: |
+          test -f website/index.html
+          test -f website/styles.css
+          test -f website/script.js
+          test -f website/CNAME
+          test -f website/assets/logo.svg
+          test -f website/assets/farm-illustration.svg
+
+      - name: Checkout public website repository
+        uses: actions/checkout@v4
+        with:
+          repository: amzy/PoultryInventory-Website
+          token: ${{ secrets.WEBSITE_REPO_TOKEN }}
+          path: public-website
+          ref: main
+
+      - name: Sync canonical website source
+        run: |
+          rsync -a --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            website/ public-website/
+
+      - name: Publish website changes
+        working-directory: public-website
+        run: |
+          git config user.name "OvalOasis Website Publisher"
+          git config user.email "actions@users.noreply.github.com"
+
+          if git diff --quiet; then
+            echo "No website changes to publish."
+            exit 0
+          fi
+
+          git add -A
+          git commit -m "Sync website from PoultryInventory-App"
+          git push origin main
 
   apk:
     name: 3. Deploy APK
     needs: [detect, web-app, website]
-    if: ${{ always() && needs.web-app.result == 'success' && needs.website.result != 'failure' && needs.website.result != 'cancelled' }}
-    uses: ./.github/workflows/android-release.yml
+    if: ${{ always() && needs.web-app.result == 'success' && (needs.website.result == 'success' || needs.website.result == 'skipped') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout App repository
+        uses: actions/checkout@v4
+
+      - name: Verify committed APK
+        run: |
+          test -s poultry-inventory.apk
+          file poultry-inventory.apk || true
+          ls -lh poultry-inventory.apk
+
+      - name: Read source version
+        id: version
+        shell: bash
+        run: |
+          VERSION_LINE=$(grep '^version:' source-version.txt 2>/dev/null | head -n 1 | sed 's/^version:[[:space:]]*//' || true)
+          if [ -z "$VERSION_LINE" ]; then VERSION_LINE="1.0.1+0"; fi
+          VERSION_NAME="${VERSION_LINE%%+*}"
+          BUILD_NUMBER="${VERSION_LINE#*+}"
+          if [ "$BUILD_NUMBER" = "$VERSION_LINE" ]; then BUILD_NUMBER=0; fi
+          echo "version_name=$VERSION_NAME" >> "$GITHUB_OUTPUT"
+          echo "build_number=$BUILD_NUMBER" >> "$GITHUB_OUTPUT"
+
+      - name: Publish latest APK release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: latest
+          target_commitish: ${{ github.sha }}
+          name: Poultry Inventory ${{ steps.version.outputs.version_name }}
+          body: |
+            Latest Android APK release.
+
+            Version: ${{ steps.version.outputs.version_name }}
+            Build number: ${{ steps.version.outputs.build_number }}
+            Public App commit: ${{ github.sha }}
+          files: poultry-inventory.apk
+          overwrite_files: true
+          make_latest: true
+          generate_release_notes: false
+          prerelease: false
