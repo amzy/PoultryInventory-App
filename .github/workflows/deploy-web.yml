@@ -1,12 +1,7 @@
 name: Deploy Flutter Web to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'web/**'
-      - '.github/workflows/deploy-web.yml'
+  workflow_call:
   workflow_dispatch:
 
 permissions:
@@ -24,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Checkout public App repository
+      - name: Checkout App repository
         uses: actions/checkout@v4
 
       - name: Prepare Pages artifact
