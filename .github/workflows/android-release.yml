@@ -1,12 +1,7 @@
 name: Android APK Release
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'poultry-inventory.apk'
-      - '.github/workflows/android-release.yml'
+  workflow_call:
   workflow_dispatch:
 
 permissions:
@@ -18,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Checkout public App repository
+      - name: Checkout App repository
         uses: actions/checkout@v4
 
       - name: Verify committed APK
