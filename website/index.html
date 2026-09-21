@@ -1,85 +1,230 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OvalOasis - Poultry Inventory Management</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f7f9fa;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e1e4e8;
-            padding: 20px;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            color: #d32f2f;
-            font-size: 2rem;
-        }
-        main {
-            flex: 1;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            text-align: center;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .cta-button {
-            display: inline-block;
-            background-color: #d32f2f;
-            color: #ffffff;
-            padding: 12px 24px;
-            margin: 20px 0;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.2s ease;
-        }
-        .cta-button:hover {
-            background-color: #b71c1c;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #666;
-            border-top: 1px solid #e1e4e8;
-            background-color: #ffffff;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0c6b4f">
+  <meta name="description" content="OvalOasis is a simple poultry farm management app for daily records, expenses, sales, lifting, reports and multi-flock tracking.">
+  <meta property="og:title" content="OvalOasis — Smart Farming. Better Tomorrow.">
+  <meta property="og:description" content="Manage your poultry farm smarter with OvalOasis.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.ovaloasis.in/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>OvalOasis | Poultry Farm Management App</title>
 </head>
 <body>
-    <header>
-        <h1>OvalOasis</h1>
-    </header>
-    <main>
-        <h2>Poultry Inventory App</h2>
-        <p>A secure, efficient, and robust solution for modern poultry farm tracking, flock logs, sales, and expense records.</p>
-        <p>Manage your birds, track daily metrics, analyze benchmarks, and export your data safely.</p>
-        
-        <a href="https://app.ovaloasis.in" class="cta-button">Launch Web App</a>
-        
-        <div style="margin-top: 30px;">
-            <h3>Download Android App</h3>
-            <p>Get the latest official Android APK from our GitHub distribution repository releases:</p>
-            <a href="https://github.com/amzy/PoultryInventory-App/releases" style="color: #d32f2f; font-weight: bold; text-decoration: underline;">Browse Releases</a>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-shell" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="OvalOasis home"><img src="assets/logo.svg" alt="OvalOasis"></a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a class="active" href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#why">Why OvalOasis</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#tour">Demo</a>
+        <a href="#support">Support</a>
+      </div>
+      <a class="nav-cta" data-apk href="https://github.com/amzy/PoultryInventory-App/releases/latest/download/app-release.apk">↓&nbsp; Download App</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <div class="eyebrow"><span class="dot"></span> Built for everyday poultry farm work</div>
+      <h1>Manage Your Poultry Farm <span>Smarter</span></h1>
+      <p class="hero-copy">OvalOasis brings daily records, expenses, sales, lifting and farm insights into one simple workspace — so you can spend less time managing paperwork and more time running your farm.</p>
+      <div class="quick-points" aria-label="Key benefits">
+        <div class="quick"><div class="quick-icon">▥</div><b>Track Stock</b></div>
+        <div class="quick"><div class="quick-icon">₹</div><b>Manage Expenses</b></div>
+        <div class="quick"><div class="quick-icon">🛒</div><b>Monitor Sales</b></div>
+        <div class="quick"><div class="quick-icon">↗</div><b>Grow Profit</b></div>
+      </div>
+      <div class="hero-actions">
+        <a class="btn-primary" data-apk href="https://github.com/amzy/PoultryInventory-App/releases/latest/download/app-release.apk">↓&nbsp; Download Latest APK&nbsp; →</a>
+        <button class="btn-secondary demo-button" type="button">▶&nbsp; Watch Product Demo</button>
+      </div>
+      <div class="meta">Version <span id="app-version">1.0.0</span> · Android · Free to use</div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <img class="farm-art" src="assets/farm-illustration.svg" alt="Healthy poultry farm illustration">
+      <div class="phone-cluster">
+        <div class="phone float">
+          <div class="phone-screen">
+            <div class="notch"></div>
+            <div class="app-top"><span>Daily Records</span><span>⌕</span></div>
+            <div class="app-body">
+              <div class="mini-card green"><div class="mini-row"><span>Flock</span><span>18 Sep 2026</span></div><div class="mini-value">12,540 birds</div></div>
+              <div class="mini-card"><div class="mini-row"><span>Feed</span><span>Today</span></div><div class="mini-value">620 kg</div></div>
+              <div class="mini-card"><div class="mini-row"><span>Direct Lift</span><span>Live</span></div><div class="mini-value">11,400 kg</div></div>
+              <div class="mini-card"><div class="mini-row"><span>Mortality</span><span>Today</span></div><div class="mini-value">12 birds</div></div>
+            </div>
+          </div>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2026 OvalOasis. All rights reserved.</p>
-    </footer>
+        <div class="phone main">
+          <div class="phone-screen">
+            <div class="notch"></div>
+            <div class="app-top"><span>OvalOasis</span><span>⌕</span></div>
+            <div class="app-body">
+              <div style="font-size:13px;font-weight:900;margin:4px 0 9px">Dashboard</div>
+              <div class="mini-card"><div class="mini-row"><span>Total Birds</span><span>Weight</span></div><div style="display:flex;justify-content:space-between"><div class="mini-value">12,540</div><div class="mini-value">18,420 kg</div></div></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+                <div class="mini-card" style="margin:0"><div class="mini-row"><span>Expenses</span></div><div class="mini-value" style="font-size:13px">₹1.59L</div></div>
+                <div class="mini-card" style="margin:0"><div class="mini-row"><span>Sales</span></div><div class="mini-value" style="font-size:13px">₹2.84L</div></div>
+              </div>
+              <div class="mini-card green" style="margin-top:8px"><div class="mini-row"><span>Profit</span><span>+12%</span></div><div class="mini-value">₹1,59,160</div><div class="spark"><i style="height:25%"></i><i style="height:40%"></i><i style="height:34%"></i><i style="height:54%"></i><i style="height:47%"></i><i style="height:69%"></i><i style="height:58%"></i><i style="height:86%"></i></div></div>
+              <div class="mini-card"><div class="mini-row"><span>Recent Activity</span><span>View all</span></div><div style="font-size:8px;margin-top:7px;line-height:1.9">• Feed purchase added<br>• Daily record updated<br>• Lifting sale recorded</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-note">Healthy Birds<br>Profitable Farms<br>Brighter Futures</div>
+      <div class="trust-strip">
+        <div class="trust-item"><div>♟</div><strong>Built for</strong><span>real farm workflows</span></div>
+        <div class="trust-item"><div>▤</div><strong>Designed for</strong><span>simple daily use</span></div>
+        <div class="trust-item"><div>◇</div><strong>Continuous</strong><span>updates & support</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><div class="section-kicker">Everything in one place</div><h2>Everything You Need<br><span style="color:var(--green)">in One App</span></h2></div>
+      <p>From daily records to financial reports, OvalOasis helps organize the numbers behind your poultry operation so you can focus on what matters most — growth.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card reveal"><div class="feature-icon">▣</div><h3>Daily Records</h3><p>Track feed, water, mortality, weights and production with less paperwork.</p></article>
+      <article class="feature-card reveal"><div class="feature-icon">₹</div><h3>Expense Management</h3><p>Record and categorize farm expenses in one organized view.</p></article>
+      <article class="feature-card reveal"><div class="feature-icon">🛒</div><h3>Sales & Lifting</h3><p>Manage direct and average lifts with detailed records and history.</p></article>
+      <article class="feature-card reveal"><div class="feature-icon">▥</div><h3>Reports & Analytics</h3><p>Get a clearer view of performance, profitability and trends.</p></article>
+      <article class="feature-card reveal"><div class="feature-icon">♙</div><h3>Multi-Flock Support</h3><p>Keep multiple flock records organized in the same app.</p></article>
+      <article class="feature-card reveal"><div class="feature-icon">☁</div><h3>Data Backup & Sync</h3><p>Use local-first workflows with cloud synchronization for continuity.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="screenshots">
+  <div class="container showcase-grid">
+    <div class="panel reveal">
+      <h2>App Screenshots</h2>
+      <p class="panel-sub">Clean, simple and powerful interface</p>
+      <div class="screens">
+        <div class="screen-card"><div class="screen-phone"><div class="tiny-ui"><div class="tiny-title">Dashboard</div><div class="tiny-box">Total Birds <b>12,540</b></div><div class="tiny-box">Profit <b>₹1.59L</b></div><div class="tiny-bars"><i style="height:30%"></i><i style="height:48%"></i><i style="height:40%"></i><i style="height:62%"></i><i style="height:54%"></i><i style="height:78%"></i></div></div></div><div class="screen-caption">Dashboard<small>Overview</small></div></div>
+        <div class="screen-card"><div class="screen-phone"><div class="tiny-ui"><div class="tiny-title">Daily Records</div><div class="tiny-box">Feed · 620 kg</div><div class="tiny-box">Mortality · 12</div><div class="tiny-box">Direct Lift · 11,400 kg</div><div class="tiny-box">Weight · 18,420 kg</div></div></div><div class="screen-caption">Daily Records<small>Feed, Mortality, Lifts</small></div></div>
+        <div class="screen-card"><div class="screen-phone"><div class="tiny-ui"><div class="tiny-title">Expenses</div><div class="tiny-box">Feed Purchase</div><div class="tiny-box">Transport</div><div class="tiny-box">Medicine</div><div class="tiny-box" style="background:#0c6b4f;color:#fff;text-align:center">Save</div></div></div><div class="screen-caption">Expenses<small>Track Costs</small></div></div>
+        <div class="screen-card"><div class="screen-phone"><div class="tiny-ui"><div class="tiny-title">Reports</div><div class="tiny-box">Expenses · ₹1.59L</div><div class="tiny-bars"><i style="height:45%"></i><i style="height:65%"></i><i style="height:55%"></i><i style="height:83%"></i><i style="height:70%"></i></div></div></div><div class="screen-caption">Reports<small>Detailed Analytics</small></div></div>
+      </div>
+    </div>
+
+    <div class="panel reveal" id="why">
+      <h2>Why Farmers Choose OvalOasis</h2>
+      <p class="panel-sub">Designed around practical farm management, not complicated software.</p>
+      <div class="why-grid">
+        <div class="why"><div class="why-icon">✓</div><div><h3>Easy to Use</h3><p>Simple and intuitive workflows for everyday records.</p></div></div>
+        <div class="why"><div class="why-icon">♟</div><div><h3>Built for Poultry</h3><p>Organized around flock, feed, mortality and lifting workflows.</p></div></div>
+        <div class="why"><div class="why-icon">◷</div><div><h3>Save Time</h3><p>Capture information quickly while you are on the move.</p></div></div>
+        <div class="why"><div class="why-icon">₹</div><div><h3>Cost Effective</h3><p>Powerful farm features without a complicated setup.</p></div></div>
+        <div class="why"><div class="why-icon">◇</div><div><h3>Reliable & Secure</h3><p>Local-first data handling with cloud synchronization.</p></div></div>
+        <div class="why"><div class="why-icon">⚙</div><div><h3>Continuous Improvement</h3><p>Built to evolve with practical farm-management needs.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" id="tour">
+  <div class="container tour">
+    <div class="tour-copy reveal">
+      <div class="section-kicker">Interactive product tour</div>
+      <h2 id="tour-title">See your flock at a glance</h2>
+      <p id="tour-copy">Track birds, weight, daily activity and key farm numbers without digging through notebooks.</p>
+      <div class="tour-tabs" role="tablist" aria-label="Product tour">
+        <button class="tour-tab active" type="button">Dashboard</button>
+        <button class="tour-tab" type="button">Daily Records</button>
+        <button class="tour-tab" type="button">Finance</button>
+        <button class="tour-tab" type="button">Reports</button>
+      </div>
+    </div>
+    <div class="demo-window reveal" aria-label="Animated OvalOasis product preview">
+      <div class="demo-toolbar"><span class="demo-dot"></span><span class="demo-dot"></span><span class="demo-dot"></span></div>
+      <div class="demo-stage">
+        <div class="demo-pane">
+          <h4>OvalOasis · Farm Dashboard</h4>
+          <div class="demo-metric"><span style="font-size:9px;color:#6d7d80">Current view</span><b id="tour-metric">12,540 birds</b></div>
+          <div class="demo-chart" id="tour-chart"></div>
+        </div>
+        <div class="demo-pane">
+          <h4>Quick actions</h4>
+          <div class="mini-card"><div class="mini-row"><span>Daily Record</span><span>+</span></div><div style="font-size:10px;margin-top:5px">Feed · Mortality · Weight</div></div>
+          <div class="mini-card"><div class="mini-row"><span>Sales / Lifting</span><span>+</span></div><div style="font-size:10px;margin-top:5px">Average · Direct · History</div></div>
+          <div class="mini-card"><div class="mini-row"><span>Expenses</span><span>+</span></div><div style="font-size:10px;margin-top:5px">Track · Categorize · Review</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="support">
+  <div class="container">
+    <div class="marketing-band reveal">
+      <div><div class="section-kicker">Start in minutes</div><h2>Put your farm records in your hands.</h2><p>Download the latest Android app or open the web experience to explore OvalOasis.</p><a class="btn-primary" data-apk href="https://github.com/amzy/PoultryInventory-App/releases/latest/download/app-release.apk">↓&nbsp; Download Latest APK</a></div>
+      <div><div style="font-size:13px;font-weight:800;color:var(--green)">Need help?</div><p style="margin:6px 0 12px">For app support, use the support contact provided with your farm setup or open the web experience.</p><a class="btn-secondary" href="https://app.ovaloasis.in">↗&nbsp; Open Web App</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-card reveal">
+      <div><div class="section-kicker">OvalOasis</div><h2>Ready to Grow Your Farm?</h2><p>Download OvalOasis and experience a simpler way to manage poultry records, costs and sales.</p><a class="btn-primary" data-apk href="https://github.com/amzy/PoultryInventory-App/releases/latest/download/app-release.apk">↓&nbsp; Download Latest APK</a><div class="meta">Version <span>1.0.0</span> · Android · Free to use</div></div>
+      <div class="cta-art"><div class="phone-outline"></div><div class="hand-note">Your Farm<br>In Your Hands</div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="assets/logo.svg" alt="OvalOasis"><p>Smart Farming. Better Tomorrow. A focused poultry management experience for daily records, expenses, sales and farm insights.</p></div>
+      <div><h4>Explore</h4><div class="footer-links"><a href="#features">Features</a><a href="#screenshots">Screenshots</a><a href="#tour">Product Demo</a><a href="#why">Why OvalOasis</a></div></div>
+      <div><h4>App</h4><div class="footer-links"><a data-apk href="https://github.com/amzy/PoultryInventory-App/releases/latest/download/app-release.apk">Download APK</a><a href="https://app.ovaloasis.in">Launch Web App</a><a href="https://app.ovaloasis.in/privacy-policy.html">Privacy Policy</a><a href="https://app.ovaloasis.in/terms-and-conditions.html">Terms of Use</a></div></div>
+      <div><h4>Support</h4><div class="footer-links"><a href="https://app.ovaloasis.in">Open Web App</a><a data-apk href="https://github.com/amzy/PoultryInventory-App/releases/latest/download/app-release.apk">Get Latest APK</a><a href="https://www.ovaloasis.in/">www.ovaloasis.in</a></div></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 OvalOasis. All rights reserved.</span><span>Smart Farming. Better Tomorrow.</span></div>
+  </div>
+</footer>
+
+<div id="demo-modal" role="dialog" aria-modal="true" aria-label="OvalOasis product demo" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(7,35,28,.72);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:18px">
+  <div style="width:min(920px,100%);max-height:90vh;overflow:auto;background:#f7fbf8;border-radius:24px;padding:18px;box-shadow:0 30px 80px rgba(0,0,0,.3);position:relative">
+    <button class="demo-close" type="button" aria-label="Close demo" style="position:absolute;right:14px;top:12px;width:36px;height:36px;border:0;border-radius:50%;background:#fff;font-size:20px;cursor:pointer">×</button>
+    <div style="padding:8px 8px 15px"><div class="section-kicker">Product demo</div><h2 style="margin:5px 0;font-size:30px">OvalOasis in motion</h2><p style="margin:0;color:var(--muted);font-size:13px">Explore the main workflows without leaving the page.</p></div>
+    <div class="demo-stage" style="height:380px">
+      <div class="demo-pane"><h4>Dashboard</h4><div class="demo-metric"><span style="font-size:9px;color:#6d7d80">Farm overview</span><b>12,540 birds</b></div><div class="demo-chart" style="height:170px"><i style="height:35%"></i><i style="height:51%"></i><i style="height:45%"></i><i style="height:66%"></i><i style="height:59%"></i><i style="height:82%"></i><i style="height:93%"></i></div></div>
+      <div class="demo-pane"><h4>Daily records & sales</h4><div class="mini-card green"><div class="mini-row"><span>Direct Lift</span><span>Today</span></div><div class="mini-value">11,400 kg</div></div><div class="mini-card"><div class="mini-row"><span>Feed</span><span>620 kg</span></div><div class="mini-value">₹42,300</div></div><div class="mini-card"><div class="mini-row"><span>Mortality</span><span>12 birds</span></div><div class="mini-value">0.10%</div></div><div class="mini-card"><div class="mini-row"><span>Reports</span><span>View</span></div><div style="font-size:9px;margin-top:5px">Performance · Expenses · Sales</div></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal=document.getElementById('demo-modal');
+  document.querySelector('.demo-button')?.addEventListener('click',()=>{modal.style.display='flex';document.body.style.overflow='hidden'});
+  document.querySelector('.demo-close')?.addEventListener('click',()=>{modal.style.display='none';document.body.style.overflow=''});
+  modal?.addEventListener('click',e=>{if(e.target===modal){modal.style.display='none';document.body.style.overflow=''}});
+</script>
+<script src="script.js" defer></script>
 </body>
 </html>
