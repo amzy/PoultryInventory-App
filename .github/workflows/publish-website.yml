@@ -1,12 +1,13 @@
 name: Publish Marketing Website
 
 on:
+  # IMPORTANT: The private repository's website/ directory is the canonical
+  # source. App-only changes must never republish or reconstruct the website.
   push:
     branches:
       - main
     paths:
       - 'website/**'
-      - '.github/workflows/publish-website.yml'
   workflow_dispatch:
 
 permissions:
@@ -18,15 +19,17 @@ concurrency:
 
 jobs:
   publish:
-    name: Sync website source to public repository
+    name: Sync canonical website source to public repository
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
       - name: Checkout private source repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      - name: Validate website source
+      - name: Validate canonical website source
         run: |
           test -f website/index.html
           test -f website/styles.css
@@ -43,9 +46,14 @@ jobs:
           path: public-website
           ref: main
 
-      - name: Sync website source
+      - name: Sync canonical website source
         run: |
-          rsync -a --delete             --exclude='.git/'             --exclude='.github/'             website/ public-website/
+          # website/ in PoultryInventory-App is the only source of truth.
+          # Never copy website files from the public mirror or an older ZIP.
+          rsync -a --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            website/ public-website/
 
       - name: Publish changes
         working-directory: public-website
