@@ -10,26 +10,12 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.ovaloasis.in/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://www.ovaloasis.in/">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <title>OvalOasis | Poultry Farm Management App</title>
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"OvalOasis",
-    "applicationCategory":"BusinessApplication",
-    "operatingSystem":"Android",
-    "url":"https://www.ovaloasis.in/",
-    "downloadUrl":"https://github.com/amzy/PoultryInventory-App/releases/latest/download/app-release.apk",
-    "description":"Poultry farm management for daily records, expenses, sales, lifting and reports."
-  }
-  </script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -38,8 +24,8 @@
   <div class="container">
     <nav class="nav-shell" aria-label="Main navigation">
       <a class="brand" href="#home" aria-label="OvalOasis home"><img src="assets/logo.svg" alt="OvalOasis"></a>
-      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-navigation">☰</button>
-      <div class="nav-links" id="site-navigation">
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+      <div class="nav-links">
         <a class="active" href="#home">Home</a>
         <a href="#features">Features</a>
         <a href="#why">Why OvalOasis</a>
@@ -222,10 +208,10 @@
   </div>
 </footer>
 
-<div id="demo-modal" class="demo-modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title" aria-hidden="true">
+<div id="demo-modal" role="dialog" aria-modal="true" aria-label="OvalOasis product demo" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(7,35,28,.72);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:18px">
   <div style="width:min(920px,100%);max-height:90vh;overflow:auto;background:#f7fbf8;border-radius:24px;padding:18px;box-shadow:0 30px 80px rgba(0,0,0,.3);position:relative">
-    <button class="demo-close" type="button" aria-label="Close demo">×</button>
-    <div class="demo-modal-head"><div class="section-kicker">Product demo</div><h2 id="demo-modal-title">OvalOasis in motion</h2><p>Explore the main workflows without leaving the page.</p></div>
+    <button class="demo-close" type="button" aria-label="Close demo" style="position:absolute;right:14px;top:12px;width:36px;height:36px;border:0;border-radius:50%;background:#fff;font-size:20px;cursor:pointer">×</button>
+    <div style="padding:8px 8px 15px"><div class="section-kicker">Product demo</div><h2 style="margin:5px 0;font-size:30px">OvalOasis in motion</h2><p style="margin:0;color:var(--muted);font-size:13px">Explore the main workflows without leaving the page.</p></div>
     <div class="demo-stage" style="height:380px">
       <div class="demo-pane"><h4>Dashboard</h4><div class="demo-metric"><span style="font-size:9px;color:#6d7d80">Farm overview</span><b>12,540 birds</b></div><div class="demo-chart" style="height:170px"><i style="height:35%"></i><i style="height:51%"></i><i style="height:45%"></i><i style="height:66%"></i><i style="height:59%"></i><i style="height:82%"></i><i style="height:93%"></i></div></div>
       <div class="demo-pane"><h4>Daily records & sales</h4><div class="mini-card green"><div class="mini-row"><span>Direct Lift</span><span>Today</span></div><div class="mini-value">11,400 kg</div></div><div class="mini-card"><div class="mini-row"><span>Feed</span><span>620 kg</span></div><div class="mini-value">₹42,300</div></div><div class="mini-card"><div class="mini-row"><span>Mortality</span><span>12 birds</span></div><div class="mini-value">0.10%</div></div><div class="mini-card"><div class="mini-row"><span>Reports</span><span>View</span></div><div style="font-size:9px;margin-top:5px">Performance · Expenses · Sales</div></div></div>
@@ -233,6 +219,12 @@
   </div>
 </div>
 
+<script>
+  const modal=document.getElementById('demo-modal');
+  document.querySelector('.demo-button')?.addEventListener('click',()=>{modal.style.display='flex';document.body.style.overflow='hidden'});
+  document.querySelector('.demo-close')?.addEventListener('click',()=>{modal.style.display='none';document.body.style.overflow=''});
+  modal?.addEventListener('click',e=>{if(e.target===modal){modal.style.display='none';document.body.style.overflow=''}});
+</script>
 <script src="script.js" defer></script>
 </body>
 </html>
