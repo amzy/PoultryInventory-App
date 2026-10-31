@@ -3,10 +3,39 @@
 <head>
   <base href="/">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="OvalOasis Poultry Inventory">
   <meta name="theme-color" content="#087A4F">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="color-scheme" content="light dark">
   <title>OvalOasis Poultry Inventory</title>
+  <style>
+    html, body {
+      min-height: 100%;
+      background: #F6F8F7;
+    }
+    @media (prefers-color-scheme: dark) {
+      html, body {
+        background: #000000;
+      }
+    }
+    body {
+      margin: 0;
+    }
+  </style>
+  <script>
+    window.setPoultryThemeColor = function (isDark) {
+      const color = isDark ? '#000000' : '#F6F8F7';
+      document.querySelectorAll('meta[name="theme-color"]').forEach(function (meta) {
+        meta.setAttribute('content', color);
+      });
+      document.documentElement.style.backgroundColor = color;
+      document.body.style.backgroundColor = color;
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+    };
+  </script>
 </head>
 <body>
   <div id="flutter-loading" style="min-height:100vh;display:grid;place-items:center;font-family:system-ui,sans-serif;color:#087A4F;">
