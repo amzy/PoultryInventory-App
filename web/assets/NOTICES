@@ -1401,6 +1401,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 --------------------------------------------------------------------------------
 async
+cli_util
 collection
 mime
 stream_channel
@@ -2401,6 +2402,7 @@ url_launcher_macos
 url_launcher_web
 url_launcher_windows
 vector_graphics
+vector_graphics_codec
 vector_graphics_compiler
 vector_math
 
@@ -6311,7 +6313,6 @@ shared_preferences_web
 shared_preferences_windows
 url_launcher
 url_launcher_platform_interface
-vector_graphics_codec
 xdg_directories
 
 Copyright 2013 The Flutter Authors. All rights reserved.
