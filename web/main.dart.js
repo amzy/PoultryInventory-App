@@ -159595,7 +159595,7 @@ p=p==null?m:B.i.E(p)
 q=p==null?0:p}p=A.ae(r==null?m:J.t(r,"monthlyAveragePricePerEgg"))
 o=p==null?m:p
 if(o==null)o=0
-return B.i.a0(s-(n.x2!=null&&n.ok.a===0?0:n.gGb())+q*30*o,0,1/0)}if(n.gva())return B.e.aW(n.k4,0,new A.bnn(n),t.i)
+return B.i.a0(s-(n.x2!=null&&n.ok.a===0?0:n.gGb())+q*30*o/100,0,1/0)}if(n.gva())return B.e.aW(n.k4,0,new A.bnn(n),t.i)
 return 0},
 gMZ(){var s,r,q,p=this.c
 p.toString
@@ -160466,7 +160466,7 @@ k=i.gxH()
 k=A.ae(k==null?h:J.t(k,"monthlyAveragePricePerEgg"))
 if(k==null)k=h
 if(k==null)k=0
-B.e.A(m,A.a([o,i.hX("Closing Stock Value","\u20b9"+B.i.I(n*30*k,2))],l))}if(i.gbE()&&i.ok.a!==0)m.push(i.hX("Selected Batches",""+i.ok.a))
+B.e.A(m,A.a([o,i.hX("Closing Stock Value","\u20b9"+B.i.I(n*30*k/100,2))],l))}if(i.gbE()&&i.ok.a!==0)m.push(i.hX("Selected Batches",""+i.ok.a))
 if(i.gbE()){o=A.a([i.hX("Settlement Month",i.ZC(i.x1))],l)
 if(!(i.x2!=null&&i.ok.a===0))B.e.A(o,A.a([i.hX("Payment Received","\u20b9"+B.i.I(i.gakf(),2)),i.hX("Outstanding After Payment","\u20b9"+B.i.I(B.i.a0(i.gPP()-i.gakf(),0,1/0),2))],l))
 B.e.A(m,o)}o=i.k4
@@ -161319,7 +161319,7 @@ d3=A.x(new A.z(d3,new A.bo6(n),d4),d4.i("ag.E"))}else d3=B.c0
 d4=n.gcg()?n.gBW():0
 d5=n.gcg()?n.gBW()*30:0
 if(n.gcg()){d6=n.gBW()
-d7=n.gbE()?n.gn9():n.gPp()
+d7=n.gbE()?n.gn9()/100:n.gPp()
 d7=d6*30*d7
 d6=d7}else d6=0
 d7=n.gcg()&&n.cy==="lifting"?n.gYM():n.ga0h()
@@ -161468,7 +161468,7 @@ $S:118}
 A.bnm.prototype={
 $2(a,b){var s=this.a,r=s.gn9()
 s=s.v0(b)
-return a+b.giB()*30*b.pN(r,s)},
+return a+b.giB()*30*b.pN(r,s)/100},
 $S:118}
 A.bnn.prototype={
 $2(a,b){var s=this.a,r=s.xG(b)
