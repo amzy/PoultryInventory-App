@@ -159595,7 +159595,7 @@ p=p==null?m:B.i.E(p)
 q=p==null?0:p}p=A.ae(r==null?m:J.t(r,"monthlyAveragePricePerEgg"))
 o=p==null?m:p
 if(o==null)o=0
-return B.i.a0(s-(n.x2!=null&&n.ok.a===0?0:n.gGc())+q*30*o/100,0,1/0)}if(n.gva())return B.e.aW(n.k4,0,new A.bnn(n),t.i)
+return B.i.a0(s-(n.x2!=null&&n.ok.a===0?0:n.gGc())+q*30*o,0,1/0)}if(n.gva())return B.e.aW(n.k4,0,new A.bnn(n),t.i)
 return 0},
 gN_(){var s,r,q,p=this.c
 p.toString
@@ -160439,16 +160439,16 @@ if(i.x2!=null&&i.ok.a===0)m.push(i.hX("Settlement Scope","Flock-wide closing sto
 else m.push(i.hX("Supplier",i.gb1E()))
 if(i.gbE())o="Agreed Average"
 else o=i.ge2()?"Estimated Monthly Average":"Live Price"
-m.push(i.hX(o,"\u20b9"+B.i.I(i.gbE()?i.gn9():i.gPq(),2)+" / egg"))
-if(i.ge2()&&i.rx!=null)m.push(i.hX("Estimate Basis",A.az("MMMM yyyy").O(i.e)+" monthly average \u2022 subject to change until settlement"))
+m.push(i.hX(o,"\u20b9"+B.i.I(i.gbE()?i.gn9():i.gPq(),4)+" / egg"))
+if(i.ge2()&&i.rx!=null)m.push(i.hX("Estimate Basis",A.az("MMMM yyyy").O(i.e)+" monthly average \u2022 price retained to 4 decimals per egg"))
 if(i.gbE()&&i.rx!=null){o=i.rx
 o.toString
-m.push(i.hX("System Monthly Average","\u20b9"+B.i.I(o,2)+" / egg"))}o=!1
+m.push(i.hX("System Monthly Average","\u20b9"+B.i.I(o,4)+" / egg"))}o=!1
 if(i.gbE())if(i.rx!=null){o=i.gn9()
 n=i.rx
 n.toString
 n=Math.abs(o-n)>0.0001
-o=n}if(o)m.push(i.hX("Supplier Agreed Override","\u20b9"+B.i.I(i.gn9(),2)+" / egg"))
+o=n}if(o)m.push(i.hX("Supplier Agreed Override","\u20b9"+B.i.I(i.gn9(),4)+" / egg"))
 if(i.ge2())o=(i.gcg()&&i.cy==="lifting"?0:i.ek(i.fy))>0
 else o=!1
 if(o)m.push(i.hX("Contract Egg Deduction","\u20b9"+B.i.I((i.gcg()&&i.cy==="lifting"?0:i.ek(i.fy))/100,2)+" / egg"))
@@ -160466,7 +160466,7 @@ k=i.gxH()
 k=A.ae(k==null?h:J.t(k,"monthlyAveragePricePerEgg"))
 if(k==null)k=h
 if(k==null)k=0
-B.e.A(m,A.a([o,i.hX("Closing Stock Value","\u20b9"+B.i.I(n*30*k/100,2))],l))}if(i.gbE()&&i.ok.a!==0)m.push(i.hX("Selected Batches",""+i.ok.a))
+B.e.A(m,A.a([o,i.hX("Closing Stock Value","\u20b9"+B.i.I(n*30*k,2))],l))}if(i.gbE()&&i.ok.a!==0)m.push(i.hX("Selected Batches",""+i.ok.a))
 if(i.gbE()){o=A.a([i.hX("Settlement Month",i.ZE(i.x1))],l)
 if(!(i.x2!=null&&i.ok.a===0))B.e.A(o,A.a([i.hX("Payment Received","\u20b9"+B.i.I(i.gakh(),2)),i.hX("Outstanding After Payment","\u20b9"+B.i.I(B.i.a0(i.gPQ()-i.gakh(),0,1/0),2))],l))
 B.e.A(m,o)}o=i.k4
@@ -160722,7 +160722,7 @@ if(p==null){p=l.e
 p===$&&A.b()}p=q.O(p)
 q=l.rx
 q.toString
-q="Current "+p+" average: \u20b9"+B.i.I(q,2)+" / egg \u2022 final settlement uses the current monthly average"}s=A.a([i,A.Z(k,A.R(A.a([n,B.cy,A.jX(k,!1,l.id,o.aoF(q),k,!1,k,k,k,k,B.bH,1,!1,new A.bnM(l),k,k,k,!1,k,k,B.a1,B.ab,k,new A.bnN())],m),B.B,k,B.p,B.q,0,B.v),B.w,k,k,new A.a2(h,k,r,s,k,k,B.C),k,k,k,B.bN,k,k,k),B.W],m)
+q="Current "+p+" average: \u20b9"+B.i.I(q,4)+" / egg \u2022 final settlement uses the current monthly average"}s=A.a([i,A.Z(k,A.R(A.a([n,B.cy,A.jX(k,!1,l.id,o.aoF(q),k,!1,k,k,k,k,B.bH,1,!1,new A.bnM(l),k,k,k,!1,k,k,B.a1,B.ab,k,new A.bnN())],m),B.B,k,B.p,B.q,0,B.v),B.w,k,k,new A.a2(h,k,r,s,k,k,B.C),k,k,k,B.bN,k,k,k),B.W],m)
 if(!(l.x2!=null&&l.ok.a===0))s.push(l.abB())
 if(l.gbE())i=!(l.x2!=null&&l.ok.a===0)
 else i=!1
@@ -160847,7 +160847,7 @@ B.e.A(b,A.a([B.cR,A.l("No category deduction \u2022 configured contract per-egg 
 c=A.o(l).ax
 l=c.rx
 B.e.A(b,A.a([B.cR,A.l("Under-weight category deduction applies. No additional per-egg deduction.",e,e,e,e,A.K(e,e,l==null?c.k3:l,e,e,e,e,e,e,e,e,10.5,e,e,e,e,e,!0,e,e,e,e,e,e,e,e),e,e,e)],i))}}b.push(B.c7)
-c=B.i.I(q,2)
+c=B.i.I(q,4)
 l=f.c
 l.toString
 b.push(A.V(A.a([A.Y(A.l("Applied price \u20b9"+c+" / egg",e,e,e,e,A.K(e,e,A.o(l).ax.b,e,e,e,e,e,e,e,e,10.5,e,e,B.a8,e,e,!0,e,e,e,e,e,e,e,e),e,e,e),1),A.l("\u20b9"+B.i.I(a.giB()*30*a.pN(r,s),2),e,e,e,e,B.eo,e,e,e)],i),B.u,B.p,B.q,0,e))
@@ -161468,7 +161468,7 @@ $S:118}
 A.bnm.prototype={
 $2(a,b){var s=this.a,r=s.gn9()
 s=s.v0(b)
-return a+b.giB()*30*b.pN(r,s)/100},
+return a+b.giB()*30*b.pN(r,s)},
 $S:118}
 A.bnn.prototype={
 $2(a,b){var s=this.a,r=s.xG(b)
@@ -161630,12 +161630,12 @@ $0(){},
 $S:0}
 A.bmN.prototype={
 $0(){var s=this.a,r=s.rx=this.b
-if(s.gbE()&&r!=null&&B.f.n(s.id.a.a).length===0)s.id.sbm(0,B.i.I(r,2))
+if(s.gbE()&&r!=null&&B.f.n(s.id.a.a).length===0)s.id.sbm(0,B.i.I(r,4))
 if(!s.gbE()&&r!=null)s.go.sbm(0,B.i.I(r,2))},
 $S:0}
 A.bmO.prototype={
 $0(){var s=this.a,r=s.rx=this.b
-if(s.gbE()){r=r==null?null:B.i.I(r,2)
+if(s.gbE()){r=r==null?null:B.i.I(r,4)
 if(r==null)r=""
 s.id.sbm(0,r)}else if(r!=null)s.go.sbm(0,B.i.I(r,2))},
 $S:0}
@@ -161974,7 +161974,7 @@ $S:76}
 A.bm4.prototype={
 $0(){var s=this,r=s.a,q=s.b===!0
 r.x2=q?s.c:null
-if(q)r.id.sbm(0,B.i.I(s.d,2))},
+if(q)r.id.sbm(0,B.i.I(s.d,4))},
 $S:0}
 A.bnA.prototype={
 $0(){var s,r,q,p,o,n,m,l=this,k=l.b
