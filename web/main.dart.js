@@ -187877,10 +187877,10 @@ return Math.sqrt(s*s+r*r)},
 gWX(){var s=this.b,r=this.d
 return Math.sqrt(s*s+r*r)},
 ayX(a){var s,r=this
-if(a!=null)s=r.a===1&&r.d===1
-else s=!0
-if(s)return a
-return(r.gWW()+r.gWX())/2*a},
+if(r.a===1&&r.d===1&&r.b===0&&r.c===0)return a
+s=(r.gWW()+r.gWX())/2
+if(Math.abs(s-1)<1e-10)return a
+return s*(a==null?1:a)},
 bod(a){var s,r,q,p,o,n,m,l=this
 if(a===0)return l
 s=Math.cos(a)
