@@ -166688,7 +166688,9 @@ a3.toString
 s=t.b
 r=A.aC(a3,!0,s).R8
 if(r.f===a2){a3=a0.a.c
-q=a3==null||a3.dx!=="manual"}else q=!1
+if(a3!=null){a3=a3.dx
+a3=a3!=="manual"&&a3!=="estimated"
+q=a3}else q=!0}else q=!1
 p=r.w
 a3=a0.cx
 o=A.cc(B.f.n(a3.a.a))
@@ -166908,7 +166910,8 @@ if(b){m.vp("Mortality must be a valid whole number.")
 s=1
 break}a=l.R8
 a0=!1
-if(g==="consumption")if(a.f==="automatic_refill_cycle"){g=!k||m.a.c.dx!=="manual"
+if(g==="consumption")if(a.f==="automatic_refill_cycle"){if(k){g=m.a.c.dx
+g=g!=="manual"&&g!=="estimated"}else g=!0
 a0=g}g=m.cx
 a1=A.cc(B.f.n(g.a.a))
 if(a1==null)a1=0
